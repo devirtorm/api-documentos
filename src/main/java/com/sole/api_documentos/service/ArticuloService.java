@@ -10,4 +10,5 @@ import org.springframework.data.domain.Pageable;
 public interface ArticuloService {
     ArticuloSummaryDTO getById(String clave);
     Page<ArticuloSummaryDTO> getAll(Pageable pageable, String search);
+    Page<ArticuloSummaryDTO> getAllByAlmacen(Pageable pageable, String search, String almacen);
 }

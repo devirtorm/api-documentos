@@ -30,4 +30,10 @@ public class ArticuloServiceImpl implements ArticuloService{
         Page<Articulo> articulosPage = articuloRepository.findBySearch(search, pageable);
         return articulosPage.map(articuloMapper::toDTO);
     }
+
+    @Override
+    public Page<ArticuloSummaryDTO> getAllByAlmacen(Pageable pageable, String search, String almacen) {
+        Page<Articulo> articulosPage = articuloRepository.findBySearchAndAlmacen(search, almacen, pageable);
+        return articulosPage.map(articuloMapper::toDTO);
+    }
 }

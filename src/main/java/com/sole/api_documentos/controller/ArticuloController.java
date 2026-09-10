@@ -31,6 +31,16 @@ public class ArticuloController {
         return ResponseEntity.ok(articuloSummaryDTOS);
     }
 
+    @GetMapping("/byAlmacen")
+    public ResponseEntity<Page<ArticuloSummaryDTO>> getAllArticulosByAlmacen(
+            @RequestParam(required = false) String search,
+            @RequestParam String almacen,
+            @PageableDefault(sort = "descripcion") Pageable pageable
+    ){
+        Page<ArticuloSummaryDTO> articuloSummaryDTOS = articuloService.getAllByAlmacen(pageable,search,almacen);
+        return ResponseEntity.ok(articuloSummaryDTOS);
+    }
+
     @GetMapping("/{agenteId}")
     public ResponseEntity<ArticuloSummaryDTO> getAllArticulosById(
             @PathVariable String agenteId
@@ -38,4 +48,6 @@ public class ArticuloController {
         ArticuloSummaryDTO articuloSummaryDTO = articuloService.getById(agenteId);
         return ResponseEntity.ok(articuloSummaryDTO);
     }
+
+    
 }

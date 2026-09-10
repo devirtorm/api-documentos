@@ -34,7 +34,7 @@ public class ClientePublicoGeneralServiceImpl implements ClientePublicoGeneralSe
         Usuario configUsuario = usuarioRepository.findById(idUsuario)
                 .orElseThrow(() -> new ResourceNotFoundException("Usuario web no encontrado"));
 
-        Cliente clienteBase = clienteRepository.findById(configUsuario.getClienteModuloWeb())
+        Cliente clienteBase = clienteRepository.findById(configUsuario.getClientePublicoGeneral())
                 .orElseThrow(() -> new ResourceNotFoundException("Cliente Base no encontrado"));
 
         // 2. Obtener y mapear los clientes de público general

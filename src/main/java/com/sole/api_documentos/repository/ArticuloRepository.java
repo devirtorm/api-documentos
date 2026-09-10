@@ -20,6 +20,22 @@ public interface ArticuloRepository extends JpaRepository<Articulo, String> {
             OR LOWER(a.clave) LIKE LOWER(CONCAT('%', :search, '%'))
             OR LOWER(a.descripcion) LIKE LOWER(CONCAT('%', :search, '%'))
         )
+        AND a.activo = 'S'
     """)
     Page<Articulo> findBySearch(@Param("search") String search, Pageable pageable);
+
+    @Query("""
+        SELECT a FROM Articulo a
+        JOIN ArticuloAlmacen aa ON aa.id.articulo = a.clave
+        WHERE a.clasificacion.clasificacionId = 'IG'
+        AND (
+            :search IS NULL OR :search = ''
+            OR LOWER(a.clave) LIKE LOWER(CONCAT('%', :search, '%'))
+            OR LOWER(a.descripcion) LIKE LOWER(CONCAT('%', :search, '%'))
+        )
+        AND aa.id.almacen = :almacen
+        AND aa.existencia > 0
+        AND a.activo = 'S'
+    """)
+    Page<Articulo> findBySearchAndAlmacen(@Param("search") String search, @Param("almacen") String almacen, Pageable pageable);
 }

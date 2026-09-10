@@ -65,10 +65,10 @@ public class AuthController {
                 user = principal.toString();
             }
 
-            // 4. Obtener el agente del usuario
-            String agente = usuarioRepository.findById(user)
-                    .map(u -> u.getAgente())
-                    .orElse("");
+            // 4. Obtener el agente y almacén del usuario (una sola consulta)
+            var usuario = usuarioRepository.findById(user);
+            String agente  = usuario.map(u -> u.getAgente()).orElse("");
+            String almacen = usuario.map(u -> u.getAlmacen()).orElse("");
 
             // 5. Crear la Cookie HttpOnly
             ResponseCookie springCookie = ResponseCookie.from("token", token)
@@ -81,7 +81,7 @@ public class AuthController {
 
             return ResponseEntity.ok()
                     .header(HttpHeaders.SET_COOKIE, springCookie.toString())
-                    .body(new LoginResponseDTO(user, agente));
+                    .body(new LoginResponseDTO(user, agente, almacen));
 
         } catch (org.springframework.security.authentication.BadCredentialsException e) {
             // AQUÍ CAERÁ SI LA CONTRASEÑA ES INCORRECTA
@@ -114,11 +114,12 @@ public class AuthController {
             user = principal.toString();
         }
 
-        String agente = usuarioRepository.findById(user)
-                .map(u -> u.getAgente())
-                .orElse("");
+        // Obtener el agente y almacén del usuario (una sola consulta)
+        var usuario = usuarioRepository.findById(user);
+        String agente  = usuario.map(u -> u.getAgente()).orElse("");
+        String almacen = usuario.map(u -> u.getAlmacen()).orElse("");
 
-        return  ResponseEntity.ok(new LoginResponseDTO(user, agente));
+        return  ResponseEntity.ok(new LoginResponseDTO(user, agente, almacen));
     }
 
 

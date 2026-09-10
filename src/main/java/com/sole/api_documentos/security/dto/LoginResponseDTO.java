@@ -6,11 +6,12 @@ import lombok.Data;
 public class LoginResponseDTO {
     private String user;
     private String agente;
+    private String almacen;
 
-
-    public LoginResponseDTO(String user, String agente) {
+    public LoginResponseDTO(String user, String agente, String almacen) {
         this.user = user;
         this.agente = agente;
+        this.almacen = almacen;
     }
 
 }

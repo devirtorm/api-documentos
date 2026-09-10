@@ -33,8 +33,8 @@ public class Usuario {
     @Column(name = "TipoUsuario")
     private String tipoUsuario;
 
-    @Column(name = "ClienteModuloWeb")
-    private String clienteModuloWeb;
+    @Column(name = "ClientePublicoGeneral")
+    private String clientePublicoGeneral;
 
     @Column(name = "UsuarioSistema")
     private String usuarioSistema;
