@@ -10,6 +10,7 @@ public class ClientePublicoGeneralSummaryDTO {
     private String telefono;
     private String ciudad;
     private String diaRevision;
+    private String ordenVisita;
     private Boolean esClienteBase;
 
 
@@ -19,6 +20,8 @@ public class ClientePublicoGeneralSummaryDTO {
     private String descuento1;
     private String descuento2;
     private String descuento3;
+    private java.util.Date fechaInicialDescuentos;
+    private java.util.Date fechaFinalDescuentos;
     private MonedaDTO moneda;
 
 }

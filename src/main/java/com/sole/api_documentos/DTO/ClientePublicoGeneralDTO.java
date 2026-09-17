@@ -1,7 +1,5 @@
 package com.sole.api_documentos.DTO;
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -29,10 +27,16 @@ public class ClientePublicoGeneralDTO {
     private String diaRevision;
 
     private String direccion;
-    private String extra1;
+    private String ordenVisita;
     private String extra2;
     private String extra3;
     private String extra4;
+    private String descuento1;
+    private String descuento2;
+    private String descuento3;
+    private String listaPrecios;
+    private java.util.Date fechaInicialDescuentos;
+    private java.util.Date fechaFinalDescuentos;
     private String extraN1;
     private String extraN2;
     private String extraN3;

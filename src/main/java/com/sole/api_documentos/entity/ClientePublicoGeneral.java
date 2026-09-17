@@ -33,8 +33,17 @@ public class ClientePublicoGeneral {
     @Column(name = "DiaRevision")
     private String diaRevision;
 
+    @Column(name = "Descuento1")
+    private String descuento1;
+
+    @Column(name = "Descuento2")
+    private String descuento2;
+
+    @Column(name = "Descuento3")
+    private String descuento3;
+
     @Column(name = "Extra1")
-    private String extra1;
+    private String ordenVisita;
 
     @Column(name = "Extra2")
     private String extra2;

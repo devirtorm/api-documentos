@@ -22,6 +22,11 @@ public interface ClientePublicoGeneralMapper {
     @Mapping(target = "telefono", source = "general.telefono")
     @Mapping(target = "ciudad", source = "general.ciudad")
     @Mapping(target = "agente", source = "general.id.agente")
+    @Mapping(target = "diaRevision", source = "general.diaRevision")
+    @Mapping(target = "descuento1", source = "general.descuento1")
+    @Mapping(target = "descuento2", source = "general.descuento2")
+    @Mapping(target = "descuento3", source = "general.descuento3")
+    @Mapping(target = "ordenVisita", source = "general.ordenVisita")
     @Mapping(target = "esClienteBase", constant = "false")
     ClientePublicoGeneralSummaryDTO fusionarCliente(Cliente base, ClientePublicoGeneral general);
 
