@@ -29,4 +29,9 @@ public class ClienteSummaryDTO {
     private String emailPrincipal;
 
     private String activo;
+    private java.util.Date fechaInicialDescuentos;
+    private java.util.Date fechaFinalDescuentos;
+    private String descuento1;
+    private String descuento2;
+    private String descuento3;
 }

@@ -32,7 +32,7 @@ public class Pedido {
     @Column(name = "Total")
     private Double total;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", cascade = jakarta.persistence.CascadeType.ALL)
     private List<PedidoDetalle> detalles;
 
 }

@@ -16,6 +16,10 @@ public class ArticuloSummaryDTO {
     private BigDecimal precio1;
     private BigDecimal precio2;
     private BigDecimal precio3;
+    private BigDecimal precio4;
+    private BigDecimal precio5;
+    private java.time.LocalDateTime fechaInicialDescuentos;
+    private java.time.LocalDateTime fechaFinalDescuentos;
 
     private BigDecimal descuento2;
     private BigDecimal descuento1;

@@ -33,6 +33,6 @@ public class Remision {
     @Column(name = "Total")
     private Double total;
 
-    @OneToMany(mappedBy = "remision")
+    @OneToMany(mappedBy = "remision", cascade = jakarta.persistence.CascadeType.ALL)
     private List<RemisionDetalle> detalles;
 }

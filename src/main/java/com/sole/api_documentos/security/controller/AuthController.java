@@ -103,6 +103,7 @@ public class AuthController {
     @GetMapping("/me")
     public ResponseEntity<LoginResponseDTO> getCurrentSession(Authentication authentication){
         if(authentication == null || !authentication.isAuthenticated()){
+            System.out.println("Intento de acceso a /me sin autenticación válida"); 
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         }
 
