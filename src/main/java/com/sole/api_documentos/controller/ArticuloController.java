@@ -41,6 +41,13 @@ public class ArticuloController {
         return ResponseEntity.ok(articuloSummaryDTOS);
     }
 
+    @GetMapping("/offline")
+    public ResponseEntity<List<ArticuloSummaryDTO>> getAllArticulosOffline(
+            @RequestParam String almacen) {
+        List<ArticuloSummaryDTO> articulos = articuloService.getAllByAlmacenOffline(almacen);
+        return ResponseEntity.ok(articulos);
+    }
+
     @GetMapping("/{agenteId}")
     public ResponseEntity<ArticuloSummaryDTO> getAllArticulosById(
             @PathVariable String agenteId

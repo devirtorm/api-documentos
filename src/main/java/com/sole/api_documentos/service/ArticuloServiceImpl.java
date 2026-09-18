@@ -7,6 +7,7 @@ import com.sole.api_documentos.mapper.ArticuloMapper;
 import com.sole.api_documentos.repository.ArticuloRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.List;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,11 @@ public class ArticuloServiceImpl implements ArticuloService{
     public Page<ArticuloSummaryDTO> getAllByAlmacen(Pageable pageable, String search, String almacen) {
         Page<Articulo> articulosPage = articuloRepository.findBySearchAndAlmacen(search, almacen, pageable);
         return articulosPage.map(articuloMapper::toDTO);
+    }
+
+    @Override
+    public List<ArticuloSummaryDTO> getAllByAlmacenOffline(String almacen) {
+        List<Articulo> articulos = articuloRepository.findAllByAlmacen(almacen);
+        return articuloMapper.toDTOList(articulos);
     }
 }

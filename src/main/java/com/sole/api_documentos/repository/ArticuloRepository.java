@@ -2,6 +2,8 @@ package com.sole.api_documentos.repository;
 
 import com.sole.api_documentos.entity.Articulo;
 
+import java.util.List;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -38,4 +40,14 @@ public interface ArticuloRepository extends JpaRepository<Articulo, String> {
         AND a.activo = 'S'
     """)
     Page<Articulo> findBySearchAndAlmacen(@Param("search") String search, @Param("almacen") String almacen, Pageable pageable);
+    @Query("""
+        SELECT a FROM Articulo a
+        JOIN ArticuloAlmacen aa ON aa.id.articulo = a.clave
+        WHERE a.clasificacion.clasificacionId = 'IG'
+        AND aa.id.almacen = :almacen
+        AND aa.existencia > 0
+        AND a.activo = 'S'
+        ORDER BY a.descripcion
+    """)
+    List<Articulo> findAllByAlmacen(@Param("almacen") String almacen);
 }
