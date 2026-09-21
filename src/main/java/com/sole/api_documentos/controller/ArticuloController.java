@@ -56,5 +56,25 @@ public class ArticuloController {
         return ResponseEntity.ok(articuloSummaryDTO);
     }
 
-    
+    @GetMapping("/precios-especiales/{cliente}")
+    public ResponseEntity<List<com.sole.api_documentos.DTO.PrecioClienteDTO>> getPreciosEspecialesPorCliente(
+            @PathVariable String cliente
+    ){
+        List<com.sole.api_documentos.DTO.PrecioClienteDTO> precios = articuloService.getPreciosEspecialesPorCliente(cliente);
+        return ResponseEntity.ok(precios);
+    }
+
+    @GetMapping("/precios-especiales/offline/all")
+    public ResponseEntity<List<com.sole.api_documentos.DTO.PrecioClienteDTO>> getAllPreciosEspeciales() {
+        List<com.sole.api_documentos.DTO.PrecioClienteDTO> precios = articuloService.getAllPreciosEspeciales();
+        return ResponseEntity.ok(precios);
+    }
+
+    @GetMapping("/precios-especiales/offline/agente/{agente}")
+    public ResponseEntity<List<com.sole.api_documentos.DTO.PrecioClienteDTO>> getPreciosEspecialesPorAgente(
+            @PathVariable String agente
+    ) {
+        List<com.sole.api_documentos.DTO.PrecioClienteDTO> precios = articuloService.getPreciosEspecialesPorAgente(agente);
+        return ResponseEntity.ok(precios);
+    }
 }

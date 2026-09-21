@@ -1,10 +1,15 @@
 package com.sole.api_documentos.service;
 
 import com.sole.api_documentos.DTO.ArticuloSummaryDTO;
+import com.sole.api_documentos.DTO.PrecioClienteDTO;
 import com.sole.api_documentos.entity.Articulo;
+import com.sole.api_documentos.entity.PrecioCliente;
 import com.sole.api_documentos.exception.ResourceNotFoundException;
 import com.sole.api_documentos.mapper.ArticuloMapper;
+import com.sole.api_documentos.mapper.PrecioClienteMapper;
 import com.sole.api_documentos.repository.ArticuloRepository;
+import com.sole.api_documentos.repository.PrecioClienteRepository;
+
 import lombok.RequiredArgsConstructor;
 
 import java.util.List;
@@ -17,6 +22,8 @@ import org.springframework.stereotype.Service;
 public class ArticuloServiceImpl implements ArticuloService{
     private final ArticuloRepository articuloRepository;
     private final ArticuloMapper articuloMapper;
+    private final PrecioClienteRepository precioClienteRepository;
+    private final PrecioClienteMapper precioClienteMapper;
 
     @Override
     public ArticuloSummaryDTO getById(String clave) {
@@ -42,5 +49,23 @@ public class ArticuloServiceImpl implements ArticuloService{
     public List<ArticuloSummaryDTO> getAllByAlmacenOffline(String almacen) {
         List<Articulo> articulos = articuloRepository.findAllByAlmacen(almacen);
         return articuloMapper.toDTOList(articulos);
+    }
+
+    @Override
+    public List<PrecioClienteDTO> getPreciosEspecialesPorCliente(String cliente) {
+        List<PrecioCliente> precios = precioClienteRepository.findByIdCliente(cliente);
+        return precioClienteMapper.toDTOList(precios);
+    }
+
+    @Override
+    public List<PrecioClienteDTO> getAllPreciosEspeciales() {
+        List<PrecioCliente> precios = precioClienteRepository.findAll();
+        return precioClienteMapper.toDTOList(precios);
+    }
+
+    @Override
+    public List<PrecioClienteDTO> getPreciosEspecialesPorAgente(String agente) {
+        List<PrecioCliente> precios = precioClienteRepository.findByAgente(agente);
+        return precioClienteMapper.toDTOList(precios);
     }
 }
