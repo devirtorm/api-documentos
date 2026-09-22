@@ -24,6 +24,7 @@ public class ClientePublicoGeneralDTO {
     private String ciudad;
 
     @NotBlank(message = "El día de revisión es obligatorio")
+    @jakarta.validation.constraints.Pattern(regexp = "^(?i)(lunes|martes|miercoles|jueves|viernes|sabado|domingo)$", message = "El día de revisión debe ser un día válido sin acentos")
     private String diaRevision;
 
     private String direccion;

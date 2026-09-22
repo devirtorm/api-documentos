@@ -28,5 +28,8 @@ public interface RemisionRepository extends JpaRepository<Remision, String> {
     );
 
     @EntityGraph(attributePaths = {"detalles"})
+    Page<Remision> findByCliProv(String clienteId, Pageable pageable);
+
+    @EntityGraph(attributePaths = {"detalles"})
     Page<Remision> findByCliProvAndStatusNot(String clienteId, String status, Pageable pageable);
 }

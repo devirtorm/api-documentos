@@ -19,6 +19,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -82,7 +83,9 @@ public class ClientePublicoGeneralServiceImpl implements ClientePublicoGeneralSe
         }
 
         if (diaRevision != null && !diaRevision.trim().isEmpty()) {
-            stream = stream.filter(c -> diaRevision.equalsIgnoreCase(c.getDiaRevision()));
+            String diaBuscado = normalizarDiaBusqueda(diaRevision);
+            stream = stream.filter(c -> c.getDiaRevision() != null && 
+                                        diaBuscado.equals(normalizarDiaBusqueda(c.getDiaRevision())));
         }
 
         List<ClientePublicoGeneralSummaryDTO> filtered = stream.collect(Collectors.toList());
@@ -255,5 +258,14 @@ public class ClientePublicoGeneralServiceImpl implements ClientePublicoGeneralSe
                 .findFirstByIdAgenteOrderByIdClaveDesc(agente)
                 .map(c -> incrementarClave(c.getId().getClave()))
                 .orElse(null);
+    }
+
+    private String normalizarDiaBusqueda(String texto) {
+        if (texto == null || texto.trim().isEmpty()) {
+            return texto;
+        }
+        String limpio = Normalizer.normalize(texto, Normalizer.Form.NFD)
+                                  .replaceAll("[\\p{InCombiningDiacriticalMarks}]", "");
+        return limpio.toUpperCase();
     }
 }

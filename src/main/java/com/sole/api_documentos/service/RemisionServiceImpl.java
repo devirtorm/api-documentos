@@ -24,10 +24,8 @@ public class RemisionServiceImpl implements RemisionService{
     }
 
     @Override
-    public Page<RemisionHistorialDTO> getHistorialByClienteId(String id,Pageable pageable) {
-        String status = "CANCELADO";
-        Page<Remision> remisionesPage = remisionRepository.findByCliProvAndStatusNot(id,status,pageable);
-
+    public Page<RemisionHistorialDTO> getHistorialByClienteId(String id, Pageable pageable) {
+        Page<Remision> remisionesPage = remisionRepository.findByCliProv(id, pageable);
         return remisionesPage.map(remisionMapper::toResponseDto);
     }
 }
