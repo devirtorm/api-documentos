@@ -41,3 +41,7 @@ application-local.properties
 application-local.yml
 application-dev.properties
 application-dev.yml
+# Agentes y skills
+.agents/
+skills/
+AGENTS.md
